@@ -5,6 +5,20 @@ export class Warrior {
     health = 100
     force = 10
     dead = false
+    owner = ""
+
+    constructor(owner) {
+        this.owner = owner
+    }
+
+
+    getHealth(){
+        return this.health
+    }
+
+    getOwner(){
+        return this.owner
+    }
 
 
 
