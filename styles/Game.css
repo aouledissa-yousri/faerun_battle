@@ -1,0 +1,73 @@
+
+.castle1-container {
+    position: absolute;
+}
+
+.castle2-container {
+    position: absolute;
+    left: 80vw;
+}
+
+.ground-container {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 100vh;
+}
+
+.turn-data {
+    position: absolute;
+    left: 45vw;
+}
+
+.castle1 {
+    height: 300px;
+}
+
+.castle2 {
+    height: 300px;
+}
+
+.ground {
+    width: 1200px;
+    height: 350px;
+}
+
+.player1-container {
+    position: absolute;
+    top: 33vh;
+    left: 1vw;
+}
+
+.player2-container {
+    position: absolute;
+    top: 33vh;
+    left: 83vw;
+}
+
+.units-trained {
+    background: rgba(128, 128, 128, 0.356);
+    height: 30vh;
+    width: 300px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.unit-select {
+    background: rgba(128, 128, 128, 0.356);
+    height: 30vh;
+    width: 300px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust as needed */
+    gap: 10px;
+}
+
+.unit-image {
+    height: 50px;
+    width: 50px;
+}

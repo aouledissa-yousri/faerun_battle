@@ -14,7 +14,7 @@ export class ArmyAdvancePhase extends Phase {
     }
 
     moveArmy(field) {
-        for(let i=0; i<4; i++) field.getSquare(i).moveFromSquare(field.getSquare(i))
+        for(let i=0; i<4; i++) field.getSquare(i).moveFromSquare(field.getSquare(i+1))
     }
 
 }

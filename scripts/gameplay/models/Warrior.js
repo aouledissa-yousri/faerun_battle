@@ -24,7 +24,7 @@ export class Warrior {
 
 
     attack(warrior){
-        warrior.takeDamage(this.force * this.generateAttackForce())
+        warrior.takeDamage(this.generateAttackForce())
     }
 
     takeDamage(force){
@@ -36,8 +36,8 @@ export class Warrior {
         let damage = 0
 
         for(let i=0; i<3; i++){
-            const num = Math.floor(Math.random() * 4)
-            damage += num * force
+            const num = Math.floor(Math.random() * 2)
+            damage += num * this.force
         }
 
         return damage

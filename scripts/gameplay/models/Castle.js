@@ -24,14 +24,16 @@ export class Castle {
     }
 
     train() {
-        this.unitsToTrain.forEach((unit) => {
+        this.unitsToTrain.forEach((index, unit) => {
             switch(unit){
-                case "Warrior": if(resource >= 1) { this.trainWarrior(); break; }
-                case "Elf": if(resource >= 2) { this.trainElf(); break; }
-                case "Dwarf": if(resource >= 1) { this.trainDwarf(); break; }
-                case "HighElf": if(resource >= 4) { this.trainHighElf(); break; }
-                case "DwarvenLord": if(resource >= 3) { this.trainDwarvenLord(); break; }
+                case "Warrior": if(resource >= 1) return this.trainWarrior()
+                case "Elf": if(resource >= 2) return this.trainElf();
+                case "Dwarf": if(resource >= 1) return this.trainDwarf();
+                case "HighElf": if(resource >= 4) return this.trainHighElf();
+                case "DwarvenLord": if(resource >= 3) return this.trainDwarvenLord();
             }
+
+            this.unitsToTrain.splice(index, 1)
         })
     }
 
