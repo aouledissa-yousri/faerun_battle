@@ -17,7 +17,8 @@
 
 .turn-data {
     position: absolute;
-    left: 45vw;
+    left: 25vw;
+    width: 50vw;
 }
 
 .castle1 {
@@ -28,10 +29,7 @@
     height: 300px;
 }
 
-.ground {
-    width: 1200px;
-    height: 350px;
-}
+
 
 .player1-container {
     position: absolute;
@@ -43,6 +41,11 @@
     position: absolute;
     top: 33vh;
     left: 83vw;
+}
+
+.disabled-container {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .units-trained {
@@ -73,13 +76,13 @@
     cursor: pointer;
 }
 
-#dwarf {
+.dwarf {
     position: absolute;
     left: 10vw;
     bottom: 7.6vw;
 }
 
-#dwarven-lord {
+.dwarven-lord {
     position: absolute;
     left: 10vw;
     bottom: 3.2vw;
@@ -95,10 +98,61 @@
     border-radius: 10px;
 }
 
-#high-elf {
+.high-elf {
     position: absolute;
     left: 5vw;
     bottom: 0.2vw;
 
+}
+
+.unit-training {
+    padding-left: 2vw;
+    overflow-y: scroll;
+    height: 230px;
+}
+
+.unit-to-train {
+    margin-bottom: 10px;
+}
+
+.ground {
+    width: 1200px;
+    height: 350px;
+}
+
+.square {
+    height: 350px;
+    width: 240px;
+    position: absolute;
+}
+
+#square-0 {
+    background: rgba(0, 4, 255, 0.521);
+    border: 1px solid black;
+    right: 68.7vw;
+}
+
+#square-1 {
+    background: rgba(0, 140, 255, 0.521);
+    border: 1px solid black;
+    right: 56.2vw;
+}
+
+#square-2 {
+    background: linear-gradient(to right, rgba(0, 140, 255, 0.521), rgba(255, 102, 0, 0.521));
+    border: 1px solid black;
+    right: 43.7vw;
+}
+
+#square-3 {
+    background: rgba(255, 102, 0, 0.521);
+    border: 1px solid black;
+    right: 31.2vw;
+}
+
+#square-4 {
+    background: rgb(255, 8, 0, 0.521);
+    border: 1px solid black;
+    right: 18.7vw;
 }
 

@@ -2,13 +2,19 @@
 
 export class Warrior {
 
+    id = 0
     health = 100
     force = 10
     dead = false
     owner = ""
 
-    constructor(owner) {
+    constructor(owner, id) {
+        this.id = id
         this.owner = owner
+    }
+
+    getId() {
+        return this.id
     }
 
 
@@ -19,6 +25,8 @@ export class Warrior {
     getOwner(){
         return this.owner
     }
+
+
 
 
 

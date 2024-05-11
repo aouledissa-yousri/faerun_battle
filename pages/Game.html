@@ -2,6 +2,9 @@
 <html>
   <head>
     <title>Faerun Battle</title>
+
+    <script src="../scripts/gameplay/main.js" defer type="module"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/Game.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -13,7 +16,7 @@
 
     <div class="turn-data">
       <p style="text-align: center; color: white; font-weight: bold; font-size: 30px;">Turn: <span id="turn">x</span></p>
-      <p style="text-align: center; color: white; font-weight: bold; font-size: 30px;">Training Phase</p>
+      <p style="text-align: center; color: white; font-weight: bold; font-size: 30px;" id="phase">Training Phase</p>
       <p style="text-align: center; color: white; font-weight: bold; font-size: 30px;">Player: <span id="player">x</span></p>
     </div>
 
@@ -23,17 +26,21 @@
 
       <div class="units-trained">
         <p style="text-align: center; color: white; font-weight: bold;">Units under training</p>
+
+        <div class="unit-training" id="unit-training-1">
+        </div>
+
       </div><br/>
 
-      <div class="unit-select">
+      <div class="unit-select" id="unit-select-1">
         <p style="text-align: center; color: white; font-weight: bold;">Choose a unit to train</p>
 
         <div class="unit-grid">
-          <div class="unit" id="warrior"><img class="unit-image" src="../assets/warrior.webp"/> <p style="color: white; font-weight: bold;">Warrior</p></div>
-          <div class="unit" id="dwarf"><img class="unit-image" src="../assets/dwarf.jpg"/> <p style="color: white; font-weight: bold;">Dwarf</p></div>
-          <div class="unit" id="elf"><img class="unit-image" src="../assets/elf.jpeg"/> <p style="color: white; font-weight: bold;">Elf</p> </div>
-          <div class="unit" id="dwarven-lord"><img class="unit-image" src="../assets/dwarven_lord.jpg"/> <p style="color: white; font-weight: bold;">Dwarven Lord</p></div>
-          <div class="unit" id="high-elf"><img class="unit-image" src="../assets/high_elf.jpeg"/> <p style="color: white; font-weight: bold;">High Elf</p></div>
+          <div class="unit warrior" id="warrior-1"><img class="unit-image" src="../assets/warrior.webp"/> <p style="color: white; font-weight: bold;">Warrior</p></div>
+          <div class="unit dwarf" id="dwarf-1"><img class="unit-image" src="../assets/dwarf.jpg"/> <p style="color: white; font-weight: bold;">Dwarf</p></div>
+          <div class="unit elf" id="elf-1"><img class="unit-image" src="../assets/elf.jpeg"/> <p style="color: white; font-weight: bold;">Elf</p> </div>
+          <div class="unit dwarven-lord" id="dwarven-lord-1"><img class="unit-image" src="../assets/dwarven_lord.jpg"/> <p style="color: white; font-weight: bold;">Dwarven Lord</p></div>
+          <div class="unit high-elf" id="high-elf-1"><img class="unit-image" src="../assets/high_elf.jpeg"/> <p style="color: white; font-weight: bold;">High Elf</p></div>
         </div>
       </div>
 
@@ -41,21 +48,25 @@
 
     <div class="player2-container">
 
-      <h4 style="color: rgb(27, 27, 27); font-weight: bold;">Resource:  <span id="resource1">x</span></h4>
+      <h4 style="color: rgb(27, 27, 27); font-weight: bold;">Resource:  <span id="resource2">x</span></h4>
 
       <div class="units-trained">
         <p style="text-align: center; color: white; font-weight: bold;">Units under training</p>
+
+        <div class="unit-training" id="unit-training-2">
+        </div>
+
       </div><br/>
 
-      <div class="unit-select">
+      <div class="unit-select" id = "unit-select-2">
         <p style="text-align: center; color: white; font-weight: bold;">Choose a unit to train</p>
 
         <div class="unit-grid">
-          <div class="unit" id="warrior"><img class="unit-image" src="../assets/warrior.webp"/> <p style="color: white; font-weight: bold;">Warrior</p></div>
-          <div class="unit" id="dwarf"><img class="unit-image" src="../assets/dwarf.jpg"/> <p style="color: white; font-weight: bold;">Dwarf</p></div>
-          <div class="unit" id="elf"><img class="unit-image" src="../assets/elf.jpeg"/> <p style="color: white; font-weight: bold;">Elf</p> </div>
-          <div class="unit" id="dwarven-lord"><img class="unit-image" src="../assets/dwarven_lord.jpg"/> <p style="color: white; font-weight: bold;">Dwarven Lord</p></div>
-          <div class="unit" id="high-elf"><img class="unit-image" src="../assets/high_elf.jpeg"/> <p style="color: white; font-weight: bold;">High Elf</p></div>
+          <div class="unit warrior" id="warrior-2"><img class="unit-image" src="../assets/warrior.webp"/> <p style="color: white; font-weight: bold;">Warrior</p></div>
+          <div class="unit dwarf" id="dwarf-2"><img class="unit-image" src="../assets/dwarf.jpg"/> <p style="color: white; font-weight: bold;">Dwarf</p></div>
+          <div class="unit elf" id="elf-2"><img class="unit-image" src="../assets/elf.jpeg"/> <p style="color: white; font-weight: bold;">Elf</p> </div>
+          <div class="unit dwarven-lord" id="dwarven-lord-2"><img class="unit-image" src="../assets/dwarven_lord.jpg"/> <p style="color: white; font-weight: bold;">Dwarven Lord</p></div>
+          <div class="unit high-elf" id="high-elf-2"><img class="unit-image" src="../assets/high_elf.jpeg"/> <p style="color: white; font-weight: bold;">High Elf</p></div>
         </div>
         
       </div>
@@ -72,9 +83,14 @@
 
       <div class="ground-container">
         <img src="../assets/ground.jpg" class="ground"/>
+        <div class = "square" id="square-0"></div>
+        <div class = "square" id="square-1"></div>
+        <div class = "square" id="square-2"></div>
+        <div class = "square" id="square-3"></div>
+        <div class = "square" id="square-4"></div>
       </div>
 
-      <button type="button" class="btn btn-success button" id="start"><b>Next Phase</b></button>
+      <button type="button" class="btn btn-success button" id="next-phase"><b>Next Phase</b></button>
 
 
   </body>

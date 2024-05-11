@@ -1,5 +1,5 @@
 import { Phase } from "./Phase.js";
-import { ArmyAdvancePhase } from "./ArmyAdvancePhase";
+import { ArmyAdvancePhase } from "./ArmyAdvancePhase.js";
 
 export class TrainingPhase extends Phase {
 

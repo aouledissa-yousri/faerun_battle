@@ -14,6 +14,10 @@ export class Castle {
         this.owner = owner
     }
 
+    getResource() {
+        return this.resource
+    }
+
 
     incrementResource() {
         this.resource++
@@ -24,42 +28,48 @@ export class Castle {
     }
 
     train() {
-        this.unitsToTrain.forEach((index, unit) => {
+        const trainedUnits = []
+
+        this.unitsToTrain.forEach((unit, index) => {
+            
             switch(unit){
-                case "Warrior": if(resource >= 1) return this.trainWarrior()
-                case "Elf": if(resource >= 2) return this.trainElf();
-                case "Dwarf": if(resource >= 1) return this.trainDwarf();
-                case "HighElf": if(resource >= 4) return this.trainHighElf();
-                case "DwarvenLord": if(resource >= 3) return this.trainDwarvenLord();
+                case "Warrior": if(this.resource >= 1) trainedUnits.push(this.trainWarrior(index)); break;
+                case "Elf": if(this.resource >= 2) trainedUnits.push(this.trainElf(index)); break;
+                case "Dwarf": if(this.resource >= 1) trainedUnits.push(this.trainDwarf(index)); break;
+                case "High Elf": if(this.resource >= 4) trainedUnits.push(this.trainHighElf(index)); break;
+                case "Dwarven Lord": if(this.resource >= 3) trainedUnits.push(this.trainDwarvenLord(index)); break;
             }
 
             this.unitsToTrain.splice(index, 1)
         })
+
+        return trainedUnits
+
     }
 
-    trainWarrior() {
+    trainWarrior(id) {
         this.resource--
-        return new Warrior(this.owner)
+        return new Warrior(this.owner, id)
     }
 
-    trainDwarf(){
+    trainDwarf(id){
         this.resource--
-        return new Dwarf(this.owner)
+        return new Dwarf(this.owner, id)
     }
 
-    trainDwarvenLord(){
+    trainDwarvenLord(id){
         this.resource -= 3
-        return new DwarvenLord(this.owner)
+        return new DwarvenLord(this.owner, id)
     }
 
-    trainElf(){
+    trainElf(id){
         this.resource -= 2
-        return new Elf(this.owner)
+        return new Elf(this.owner, id)
     }
 
-    trainHighElf(){
+    trainHighElf(id){
         this.resource -= 4
-        return new HighElf(this.owner)
+        return new HighElf(this.owner, id)
     }
     
 }

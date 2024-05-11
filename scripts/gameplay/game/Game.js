@@ -43,6 +43,10 @@ export class Game {
         return this.turn
     }
 
+    getPlayer(){
+        return this.player
+    }
+
     nextPhase(){
         this.phase = this.phase.nextPhase()
     }
@@ -53,7 +57,6 @@ export class Game {
         if(this.player === 1) this.player = 2
         else this.player = 1
 
-        this.phase = new TrainingPhase()
     }
 
 
