@@ -62,12 +62,43 @@
 }
 
 .unit-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust as needed */
-    gap: 10px;
+    padding-left: 20px;
 }
 
 .unit-image {
     height: 50px;
     width: 50px;
+    max-width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
 }
+
+#dwarf {
+    position: absolute;
+    left: 10vw;
+    bottom: 7.6vw;
+}
+
+#dwarven-lord {
+    position: absolute;
+    left: 10vw;
+    bottom: 3.2vw;
+
+}
+
+.button {
+    position: absolute;
+    left: 45%;
+    bottom: 20%;
+    height: 50px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+#high-elf {
+    position: absolute;
+    left: 5vw;
+    bottom: 0.2vw;
+
+}
+
