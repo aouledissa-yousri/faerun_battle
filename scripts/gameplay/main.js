@@ -59,14 +59,18 @@ nextPhase.addEventListener("click", () => {
 
         case "Training Phase":
             playerPanels[game.getPlayer() - 1].unitsContainer.classList.remove("disabled-container")
-            playerPanels.forEach((panel, index) => { if(game.getPlayer() - 1 !== index) panel.unitsContainer.classList.add("disabled-container")}) 
+            playerPanels.forEach((panel, index) => { if(game.getPlayer() - 1 !== index) panel.unitsContainer.classList.add("disabled-container")})
+            GameplayUIHelper.enterTrainingPhase(game, playerPanels, game.getPlayer())
             break;
 
         case "Army Advance Phase":
             playerPanels[game.getPlayer() - 1].unitsContainer.classList.add("disabled-container")
+            GameplayUIHelper.advanceArmy(game.getField())
             break;
         
-        //case "Battle Phase":
+        case "Battle Phase":
+            GameplayUIHelper.attack(game.getPlayer())
+            break;
 
         case "End Phase": 
             game.nextTurn()
@@ -88,7 +92,7 @@ playerPanels[0].warrior.addEventListener("click", () => {
     game.getCastle1().chooseUnitTraining("Warrior")
     GameplayUIHelper.displayTrainedUnit("Warrior", "../assets/warrior.webp", 1)
 
-    playerPanels[0].warriors = playerPanels[0].warriors.concat(game.getCastle1().train())
+    GameplayUIHelper.addUnitToField(game.getCastle1().train(), playerPanels, 1, game.getField())
     playerPanels[0].resource.innerText = game.getCastle1().resource
     
 
@@ -98,7 +102,7 @@ playerPanels[0].dwarf.addEventListener("click", () => {
     game.getCastle1().chooseUnitTraining("Dwarf")
     GameplayUIHelper.displayTrainedUnit("Dwarf", "../assets/dwarf.jpg", 1)
 
-    playerPanels[0].warriors = playerPanels[0].warriors.concat(game.getCastle1().train())
+    GameplayUIHelper.addUnitToField(game.getCastle1().train(), playerPanels, 1, game.getField())
     playerPanels[0].resource.innerText = game.getCastle1().resource
 
 
@@ -108,7 +112,7 @@ playerPanels[0].elf.addEventListener("click", () => {
     game.getCastle1().chooseUnitTraining("Elf")
     GameplayUIHelper.displayTrainedUnit("Elf", "../assets/elf.jpeg", 1)
 
-    playerPanels[0].warriors = playerPanels[0].warriors.concat(game.getCastle1().train())
+    GameplayUIHelper.addUnitToField(game.getCastle1().train(), playerPanels, 1, game.getField())
     playerPanels[0].resource.innerText = game.getCastle1().resource
 })
 
@@ -116,7 +120,7 @@ playerPanels[0].dwarvenLord.addEventListener("click", () => {
     game.getCastle1().chooseUnitTraining("Dwarven Lord")
     GameplayUIHelper.displayTrainedUnit("Dwarven Lord", "../assets/dwarven_lord.jpg", 1)
 
-    playerPanels[0].warriors = playerPanels[0].warriors.concat(game.getCastle1().train())
+    GameplayUIHelper.addUnitToField(game.getCastle1().train(), playerPanels, 1, game.getField())
     playerPanels[0].resource.innerText = game.getCastle1().resource
 })
 
@@ -124,7 +128,7 @@ playerPanels[0].highElf.addEventListener("click", () => {
     game.getCastle1().chooseUnitTraining("High Elf")
     GameplayUIHelper.displayTrainedUnit("High Elf", "../assets/high_elf.jpeg", 1)
 
-    playerPanels[0].warriors = playerPanels[0].warriors.concat(game.getCastle1().train())
+    GameplayUIHelper.addUnitToField(game.getCastle1().train(), playerPanels, 1, game.getField())
     playerPanels[0].resource.innerText = game.getCastle1().resource
 })
 
@@ -137,7 +141,7 @@ playerPanels[1].warrior.addEventListener("click", () => {
     game.getCastle2().chooseUnitTraining("Warrior")
     GameplayUIHelper.displayTrainedUnit("Warrior", "../assets/warrior.webp", 2)
 
-    playerPanels[1].warriors = playerPanels[1].warriors.concat(game.getCastle2().train())
+    GameplayUIHelper.addUnitToField(game.getCastle2().train(), playerPanels, 2, game.getField())
     playerPanels[1].resource.innerText = game.getCastle2().resource
 })
 
@@ -145,7 +149,7 @@ playerPanels[1].dwarf.addEventListener("click", () => {
     game.getCastle2().chooseUnitTraining("Dwarf")
     GameplayUIHelper.displayTrainedUnit("Dwarf", "../assets/dwarf.jpg", 2)
 
-    playerPanels[1].warriors = playerPanels[1].warriors.concat(game.getCastle2().train())
+    GameplayUIHelper.addUnitToField(game.getCastle2().train(), playerPanels, 2, game.getField())
     playerPanels[1].resource.innerText = game.getCastle2().resource
 })
 
@@ -153,7 +157,7 @@ playerPanels[1].elf.addEventListener("click", () => {
     game.getCastle2().chooseUnitTraining("Elf")
     GameplayUIHelper.displayTrainedUnit("Elf", "../assets/elf.jpeg", 2)
 
-    playerPanels[1].warriors = playerPanels[1].warriors.concat(game.getCastle2().train())
+    GameplayUIHelper.addUnitToField(game.getCastle2().train(), playerPanels, 2, game.getField())
     playerPanels[1].resource.innerText = game.getCastle2().resource
 })
 
@@ -161,7 +165,7 @@ playerPanels[1].dwarvenLord.addEventListener("click", () => {
     game.getCastle2().chooseUnitTraining("Dwarven Lord")
     GameplayUIHelper.displayTrainedUnit("Dwarven Lord", "../assets/dwarven_lord.jpg", 2)
 
-    playerPanels[1].warriors = playerPanels[1].warriors.concat(game.getCastle2().train())
+    GameplayUIHelper.addUnitToField(game.getCastle2().train(), playerPanels, 2, game.getField())
     playerPanels[1].resource.innerText = game.getCastle2().resource
 })
 
@@ -169,7 +173,7 @@ playerPanels[1].highElf.addEventListener("click", () => {
     game.getCastle2().chooseUnitTraining("High Elf")
     GameplayUIHelper.displayTrainedUnit("High Elf", "../assets/high_elf.jpeg", 2)
 
-    playerPanels[1].warriors = playerPanels[1].warriors.concat(game.getCastle2().train())
+    GameplayUIHelper.addUnitToField(game.getCastle2().train(), playerPanels, 2, game.getField())
     playerPanels[1].resource.innerText = game.getCastle2().resource
 })
 

@@ -124,6 +124,8 @@
     height: 350px;
     width: 240px;
     position: absolute;
+    padding: 15px;
+    padding-left: 30px;
 }
 
 #square-0 {
@@ -154,5 +156,26 @@
     background: rgb(255, 8, 0, 0.521);
     border: 1px solid black;
     right: 18.7vw;
+}
+
+
+.area-player-1 {
+    display: inline-block;
+}
+
+.area-player-2 {
+    position: absolute;
+    display: inline-block;
+    margin-left: 50px;
+}
+
+.health-player-1 {
+    color: rgb(4, 4, 104);
+    margin-left: 10px;
+}
+
+.health-player-2 {
+    color: rgb(104, 4, 4);
+    margin-left: 10px;
 }
 

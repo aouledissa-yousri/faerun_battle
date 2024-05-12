@@ -10,6 +10,8 @@ export class Castle {
     unitsToTrain = []
     owner = ""
 
+    idCounter = 0
+
     constructor(owner) {
         this.owner = owner
     }
@@ -18,29 +20,38 @@ export class Castle {
         return this.resource
     }
 
+    getUnitsToTrain() {
+        return this.unitsToTrain
+    }
+
 
     incrementResource() {
         this.resource++
     }
 
     chooseUnitTraining(unit){
-        if(unit === "Warrior" || unit === "Elf" || unit === "Dwarf" || unit === "HighElf" || unit === "DwarvenLord") this.unitsToTrain.push(unit)
+        if(unit === "Warrior" || unit === "Elf" || unit === "Dwarf" || unit === "High Elf" || unit === "Dwarven Lord") this.unitsToTrain.push(unit)
     }
 
     train() {
         const trainedUnits = []
 
         this.unitsToTrain.forEach((unit, index) => {
+
+            let trained = false
             
             switch(unit){
-                case "Warrior": if(this.resource >= 1) trainedUnits.push(this.trainWarrior(index)); break;
-                case "Elf": if(this.resource >= 2) trainedUnits.push(this.trainElf(index)); break;
-                case "Dwarf": if(this.resource >= 1) trainedUnits.push(this.trainDwarf(index)); break;
-                case "High Elf": if(this.resource >= 4) trainedUnits.push(this.trainHighElf(index)); break;
-                case "Dwarven Lord": if(this.resource >= 3) trainedUnits.push(this.trainDwarvenLord(index)); break;
+                case "Warrior": if(this.resource >= 1) {trained = true; trainedUnits.push(this.trainWarrior(this.idCounter));} break;
+                case "Elf": if(this.resource >= 2) {trained = true; trainedUnits.push(this.trainElf(this.idCounter));} break;
+                case "Dwarf": if(this.resource >= 1) {trained = true; trainedUnits.push(this.trainDwarf(this.idCounter));} break;
+                case "High Elf": if(this.resource >= 4) {trained = true; trainedUnits.push(this.trainHighElf(this.idCounter));} break;
+                case "Dwarven Lord": if(this.resource >= 3) {trained = true; trainedUnits.push(this.trainDwarvenLord(this.idCounter));} break;
             }
 
-            this.unitsToTrain.splice(index, 1)
+            if(trained === true) {
+                this.idCounter++
+                this.unitsToTrain.splice(index, 1)
+            }
         })
 
         return trainedUnits

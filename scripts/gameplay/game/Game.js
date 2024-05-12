@@ -19,8 +19,8 @@ export class Game {
         this.turn = 1
         this.field = new Field()
 
-        this.castle1 = new Castle("player1")
-        this.castle2 = new Castle("player2")
+        this.castle1 = new Castle("player-1")
+        this.castle2 = new Castle("player-2")
     }
 
     getField() {

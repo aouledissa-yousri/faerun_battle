@@ -7,10 +7,12 @@ export class Warrior {
     force = 10
     dead = false
     owner = ""
+    image = ""
 
     constructor(owner, id) {
         this.id = id
         this.owner = owner
+        this.image = `../assets/warrior-${this.owner}.png`
     }
 
     getId() {
@@ -27,6 +29,9 @@ export class Warrior {
     }
 
 
+    getImage() {
+        return this.image
+    }
 
 
 
