@@ -1,3 +1,4 @@
+import { UtilsHelper } from "./UtilsHelper.js"
 
 
 export class GameplayUIHelper {
@@ -30,6 +31,7 @@ export class GameplayUIHelper {
 
             const divElement = document.createElement("div");
             divElement.classList.add("unit-to-train", `unit-player-${player}`);
+            divElement.id = unit.getId()
 
             const spanElement = document.createElement("span");
             spanElement.classList.add("health-player-1");
@@ -73,15 +75,17 @@ export class GameplayUIHelper {
         
     }
 
-    static advanceArmy(field) {
+    static advanceArmy(field, turn) {
 
-        for(let i=3; i>=0; i--) {
+        if(turn > 2) {
+            for(let i=3; i>=0; i--) {
 
-            field.getSquare(i).moveFromSquare(field.getSquare(i+1))
-            if(GameplayUIHelper.squareEmpty(1, i)) GameplayUIHelper.movePlayerArmy(1, i)
+                field.getSquare(i).moveFromSquare(field.getSquare(i+1))
+                if(GameplayUIHelper.squareEmpty(1, i)) GameplayUIHelper.movePlayerArmy(1, i)
+            }
+    
+            for(let i=1; i<=4; i++) if(GameplayUIHelper.squareEmpty(2, i)) GameplayUIHelper.movePlayerArmy(2, i)
         }
-
-        for(let i=1; i<=4; i++) if(GameplayUIHelper.squareEmpty(2, i)) GameplayUIHelper.movePlayerArmy(2, i)
             
         
 
@@ -102,19 +106,64 @@ export class GameplayUIHelper {
     }  
     
     
-    static attack(player) {
+    static enterBattlePhase(player, playerPanels) {
 
-        [...document.getElementsByClassName(`unit-player-${player}`)].forEach(element => {
-            element.addEventListener("click", () => {
-                (player === 1)? [...element.parentNode.parentNode.getElementsByClassName(`area-player-2`)[0].getElementsByClassName(`unit-player-2`)].forEach(element => {
-                    element.addEventListener("click", () => console.log("attacked 1"))
-                })
+        if(player === 1) {
+           
+            for(let i=0; i<5; i++) {
+                const square = document.getElementById("square-"+i);
+
+                if(square.getElementsByClassName("area-player-1")[0].getElementsByClassName("unit-player-1").length > 0) {
+                   [... square.getElementsByClassName("area-player-1")[0].getElementsByClassName("unit-player-1")].forEach(element => {
+                        const attacker =  playerPanels[player - 1].warriors.find(warrior => warrior.id === parseInt(element.id))
+                        const randomEnemy = square.getElementsByClassName("area-player-2")[0].getElementsByClassName("unit-player-2")[UtilsHelper.getRandomInt(0, square.getElementsByClassName("area-player-2")[0].getElementsByClassName("unit-player-2").length -1)]
+                        const defender = playerPanels[player].warriors.find(warrior => warrior.id === parseInt(randomEnemy.id))
+                        attacker.attack(defender)
+                        if(defender.getHealth() <= 0 || isNaN(defender.getHealth())) { randomEnemy.remove(); playerPanels[player].warriors.splice(playerPanels[player].warriors.findIndex(element => element.getId() === defender.getId()))}
+                        else randomEnemy.getElementsByClassName("health-player-1")[0].innerHTML = defender.getHealth()
+                    })
+                }
 
 
-                : [...element.parentNode.parentNode.getElementsByClassName(`area-player-1`)[0].getElementsByClassName(`unit-player-1`)].forEach(element => {
-                    element.addEventListener("click", () => console.log("attacked 2"))
-                })
-            })
-        })
+            }
+        }else {
+
+            for(let i=0; i<5; i++) {
+                const square = document.getElementById("square-"+i);
+
+                if(square.getElementsByClassName("area-player-2")[0].getElementsByClassName("unit-player-2").length > 0) {
+                   [... square.getElementsByClassName("area-player-2")[0].getElementsByClassName("unit-player-2")].forEach(element => {
+                        const attacker =  playerPanels[player - 1].warriors.find(warrior => warrior.id === parseInt(element.id))
+                        const randomEnemy = square.getElementsByClassName("area-player-1")[0].getElementsByClassName("unit-player-1")[UtilsHelper.getRandomInt(0, square.getElementsByClassName("area-player-1")[0].getElementsByClassName("unit-player-1").length -1)]
+                        const defender = playerPanels[player -2].warriors.find(warrior => warrior.id === parseInt(randomEnemy.id))
+                        attacker.attack(defender)
+
+                        if(defender.getHealth() <= 0 || isNaN(defender.getHealth())) { randomEnemy.remove(); playerPanels[player-2].warriors.splice(playerPanels[player-2].warriors.findIndex(element => element.getId() === defender.getId()))}
+                        else randomEnemy.getElementsByClassName("health-player-1")[0].innerHTML = defender.getHealth()
+                    })
+                }
+            }
+
+        }
+
+        
     }
+
+
+    static decideRoundWinner(player1, player2) {
+        if(player1.warriors.length > player2.warriors.length) document.getElementById("result").innerHTML = "Player 1 Won the round"
+        else if(player1.warriors.length < player2.warriors.length) document.getElementById("result").innerHTML = "Player 2 Won the round"
+        else document.getElementById("result").innerHTML = "Round ended in a draw"
+    }
+
+    static decideGameWinner() {
+        if(document.getElementById("square-0").getElementsByClassName("area-player-2")[0].getElementsByClassName("unit-player-2").length !== 0 && document.getElementById("square-0").getElementsByClassName("area-player-1")[0].getElementsByClassName("unit-player-1").length == 0) { document.getElementById("result").innerHTML = "Player 2 won"; document.getElementById("next-phase").disabled = true }
+        else if(document.getElementById("square-4").getElementsByClassName("area-player-1")[0].getElementsByClassName("unit-player-1").length !== 0 && document.getElementById("square-4").getElementsByClassName("area-player-2")[0].getElementsByClassName("unit-player-2").length == 0) { document.getElementById("result").innerHTML = "Player 1 won"; document.getElementById("next-phase").disabled = true; }
+    }
+
+    static startNewRound() {
+        document.getElementById("result").innerHTML = ""
+    }
+
+   
 }

@@ -92,7 +92,7 @@
 .button {
     position: absolute;
     left: 45%;
-    bottom: 20%;
+    bottom: 10%;
     height: 50px;
     width: 200px;
     border-radius: 10px;
@@ -157,6 +157,8 @@
     border: 1px solid black;
     right: 18.7vw;
 }
+
+
 
 
 .area-player-1 {

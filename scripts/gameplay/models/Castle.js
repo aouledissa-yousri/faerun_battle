@@ -10,7 +10,7 @@ export class Castle {
     unitsToTrain = []
     owner = ""
 
-    idCounter = 0
+    static idCounter = 1
 
     constructor(owner) {
         this.owner = owner
@@ -22,6 +22,10 @@ export class Castle {
 
     getUnitsToTrain() {
         return this.unitsToTrain
+    }
+
+    getIdCounter() {
+        return this.idCounter
     }
 
 
@@ -41,15 +45,15 @@ export class Castle {
             let trained = false
             
             switch(unit){
-                case "Warrior": if(this.resource >= 1) {trained = true; trainedUnits.push(this.trainWarrior(this.idCounter));} break;
-                case "Elf": if(this.resource >= 2) {trained = true; trainedUnits.push(this.trainElf(this.idCounter));} break;
-                case "Dwarf": if(this.resource >= 1) {trained = true; trainedUnits.push(this.trainDwarf(this.idCounter));} break;
-                case "High Elf": if(this.resource >= 4) {trained = true; trainedUnits.push(this.trainHighElf(this.idCounter));} break;
-                case "Dwarven Lord": if(this.resource >= 3) {trained = true; trainedUnits.push(this.trainDwarvenLord(this.idCounter));} break;
+                case "Warrior": if(this.resource >= 1) {trained = true; trainedUnits.push(this.trainWarrior(Castle.idCounter));} break;
+                case "Elf": if(this.resource >= 2) {trained = true; trainedUnits.push(this.trainElf(Castle.idCounter));} break;
+                case "Dwarf": if(this.resource >= 1) {trained = true; trainedUnits.push(this.trainDwarf(Castle.idCounter));} break;
+                case "High Elf": if(this.resource >= 4) {trained = true; trainedUnits.push(this.trainHighElf(Castle.idCounter));} break;
+                case "Dwarven Lord": if(this.resource >= 3) {trained = true; trainedUnits.push(this.trainDwarvenLord(Castle.idCounter));} break;
             }
 
             if(trained === true) {
-                this.idCounter++
+                Castle.idCounter++
                 this.unitsToTrain.splice(index, 1)
             }
         })

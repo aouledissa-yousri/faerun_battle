@@ -41,8 +41,8 @@ export class Warrior {
     }
 
     takeDamage(force){
-        health -= force
-        if(health === 0) this.dead = true
+        this.health -= force
+        if(this.health === 0) this.dead = true
     }
 
     generateAttackForce(){

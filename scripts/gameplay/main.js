@@ -58,6 +58,7 @@ nextPhase.addEventListener("click", () => {
     switch(phase.innerText) {
 
         case "Training Phase":
+            GameplayUIHelper.startNewRound()
             playerPanels[game.getPlayer() - 1].unitsContainer.classList.remove("disabled-container")
             playerPanels.forEach((panel, index) => { if(game.getPlayer() - 1 !== index) panel.unitsContainer.classList.add("disabled-container")})
             GameplayUIHelper.enterTrainingPhase(game, playerPanels, game.getPlayer())
@@ -65,14 +66,16 @@ nextPhase.addEventListener("click", () => {
 
         case "Army Advance Phase":
             playerPanels[game.getPlayer() - 1].unitsContainer.classList.add("disabled-container")
-            GameplayUIHelper.advanceArmy(game.getField())
+            GameplayUIHelper.advanceArmy(game.getField(), game.getTurn())
             break;
         
         case "Battle Phase":
-            GameplayUIHelper.attack(game.getPlayer())
+            GameplayUIHelper.enterBattlePhase(game.getPlayer(), playerPanels)
             break;
 
         case "End Phase": 
+            if(game.getTurn() > 2) GameplayUIHelper.decideRoundWinner(playerPanels[0], playerPanels[1])
+            GameplayUIHelper.decideGameWinner()
             game.nextTurn()
 
             game.getCastle1().incrementResource()
